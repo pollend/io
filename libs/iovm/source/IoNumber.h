@@ -100,6 +100,9 @@ IOVM_API IO_METHOD(IoNumber, squared);
 IOVM_API IO_METHOD(IoNumber, cubed);
 
 IOVM_API IO_METHOD(IoNumber, tan);
+IOVM_API IO_METHOD(IoNumber, toRadians);
+IOVM_API IO_METHOD(IoNumber, toDegrees);
+IOVM_API IO_METHOD(IoNumber, toBase);
 
 //IO_METHOD(IoNumber, frexp);
 //IO_METHOD(IoNumber, ldexp);
