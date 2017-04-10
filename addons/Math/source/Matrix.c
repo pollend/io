@@ -2,21 +2,77 @@
 // Created by michaelpollind on 4/8/17.
 //
 
-#include "Base.h"
-
 #include "Matrix.h"
 
 Matrix *Matrix_new(int size1,int size2)
 {
     Matrix *self = (Matrix *)io_calloc(1, sizeof(Matrix));
 
-    double* data = (double*)io_calloc(size1*size2,sizeof(double));
+    double* data = (double*)io_calloc(1,sizeof(double)*size1*size2);
     self->data = data;
     self->size1 = size1;
     self->size2 = size2;
     return  self;
 }
 
+Matrix* Matrix_clone(Matrix* matrix)
+{
+    Matrix *s = cpalloc(matrix,sizeof(Matrix));
+    s->data = cpalloc(matrix->data,sizeof(double)*s->size2*s->size1);
+    return s;
+}
+
+Matrix* Matrix_add(Matrix* m1, Matrix* m2)
+{
+    Matrix* result = Matrix_clone(m1);
+    for(int x = 0; x < result->size1; ++x)
+    {
+        for(int y = 0; y < result->size2; y++)
+        {
+           Matrix_put_(result,x,y,Matrix_at_(m1,x,y) + Matrix_at_(m2,x,y));
+        }
+    }
+    return  result;
+}
+Matrix* Matrix_subtract(Matrix* m1, Matrix* m2)
+{
+    Matrix* result = Matrix_new(m1->size1,m1->size2);
+    for(int x = 0; x < result->size1; ++x)
+    {
+        for(int y = 0; y < result->size2; y++)
+        {
+            Matrix_put_(result,x,y,Matrix_at_(m1,x,y) - Matrix_at_(m2,x,y));
+        }
+    }
+    return  result;
+}
+Matrix* Matrix_multiply(Matrix* m1, Matrix* m2)
+{
+    Matrix* result = Matrix_new(m1->size2,m2->size1);
+    for(int x = 0; x < result->size1; ++x)
+    {
+        for(int y = 0; y < result->size2; y++)
+        {
+            double out = 0.0;
+            for(int z = 0; z < m1->size1; ++z)
+            {
+                out += Matrix_at_(m2,x,z)*Matrix_at_(m1,z,y)
+            }
+
+            Matrix_put_(result,x,y,out);
+        }
+    }
+}
+
+void Matrix_put_(Matrix* m1,int x, int y, double value)
+{
+    m1->data[(x * m1->size1) + y] = value;
+}
+
+double Matrix_at_(Matrix* m1,int x,int y)
+{
+    return m1->data[(x * m1->size1) + y];
+}
 
 void Matrix_free(Matrix* matrix)
 {
