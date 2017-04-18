@@ -134,6 +134,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"roundDown", IoNumber_roundDown},
 	{"sin", IoNumber_sin},
 	{"sqrt", IoNumber_sqrt},
+	{"cbrt", IoNumber_cbrt},
 	{"squared", IoNumber_squared},
 	{"cubed", IoNumber_cubed},
 	{"tan", IoNumber_tan},
@@ -844,6 +845,15 @@ IO_METHOD(IoNumber, sqrt)
 	*/
 
 	return IONUMBER(sqrt(DATA(self)));
+}
+
+IO_METHOD(IoNumber, cbrt)
+{
+	/*doc Number cbrt
+	Returns the cube root of the receiver.
+	*/
+
+	return IONUMBER(cbrt(DATA(self)));
 }
 
 IO_METHOD(IoNumber, squared)

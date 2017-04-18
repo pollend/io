@@ -95,6 +95,7 @@ IOVM_API IO_METHOD(IoNumber, roundDown);
 
 IOVM_API IO_METHOD(IoNumber, sin);
 IOVM_API IO_METHOD(IoNumber, sqrt);
+IOVM_API IO_METHOD(IoNumber, cbrt);
 
 IOVM_API IO_METHOD(IoNumber, squared);
 IOVM_API IO_METHOD(IoNumber, cubed);
