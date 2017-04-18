@@ -175,6 +175,8 @@ IoNumber *IoNumber_proto(void *state)
 	{"isSpace", IoNumber_isSpace},
 	{"isHexDigit", IoNumber_isHexDigit},
 	{"isPrime", IoNumber_isPrime},
+	{"isSquare", IoNumber_isSquare},
+	{"isTriangular", IoNumber_isTriangular},
 
 	{"asLowercase", IoNumber_asLowercase},
 	{"asUppercase", IoNumber_asUppercase},
@@ -1202,6 +1204,46 @@ IO_METHOD(IoNumber, isPrime)
   return IOBOOL(self, 1 == 1);
 }
 
+IO_METHOD(IoNumber, isSquare)
+{
+	/*doc Number isSquare
+	Returns true if
+	integer form of the receiver is a perfect square
+	, false otherwise.
+	*/
+
+	int n = DATA(self);
+	int a;
+  for(a = 0; a <= n; a++)
+  {
+      if (n == a * a)
+      {
+          return IOBOOL(self, 1 == 1);
+      }
+  }
+  return IOBOOL(self, 1 == 0);
+}
+
+IO_METHOD(IoNumber, isTriangular)
+{
+	/*doc Number isTriangular
+	Returns true if
+	integer form of the receiver is a triangular number
+	, false otherwise.
+	*/
+
+	int n = DATA(self);
+	n = 8 * n + 1;
+	int a;
+  for(a = 0; a <= n; a++)
+  {
+      if (n == a * a)
+      {
+          return IOBOOL(self, 1 == 1);
+      }
+  }
+  return IOBOOL(self, 1 == 0);
+}
 
 // case ---------------------------------
 

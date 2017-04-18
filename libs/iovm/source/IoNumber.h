@@ -143,6 +143,8 @@ IOVM_API IO_METHOD(IoNumber, isPunctuation);
 IOVM_API IO_METHOD(IoNumber, isSpace);
 IOVM_API IO_METHOD(IoNumber, isHexDigit);
 IOVM_API IO_METHOD(IoNumber, isPrime);
+IOVM_API IO_METHOD(IoNumber, isSquare);
+IOVM_API IO_METHOD(IoNumber, isTriangular);
 
 IOVM_API IO_METHOD(IoNumber, asLowercase);
 IOVM_API IO_METHOD(IoNumber, asUppercase);
