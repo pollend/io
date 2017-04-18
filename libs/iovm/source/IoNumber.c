@@ -102,6 +102,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"-", IoNumber_subtract},
 	{"*", IoNumber_multiply},
 	{"/", IoNumber_divide},
+	{"//", IoNumber_floorDivision},
 	//{"print", IoNumber_printNumber},
 
 	{"asString", IoNumber_asString},
@@ -408,6 +409,19 @@ IO_METHOD(IoNumber, divide)
 
 	IoNumber *other = IoMessage_locals_numberArgAt_(m, locals, 0);
 	return IONUMBER(DATA(self) / DATA(other));
+}
+
+IO_METHOD(IoNumber, floorDivision)
+{
+	/*doc Number //(aNumber)
+	Returns a new number with the value of the receiver divided by aNumber, then the floor of the result
+	*/
+
+	IoNumber *other = IoMessage_locals_numberArgAt_(m, locals, 0);
+	int a = DATA(self);
+	int b = DATA(other);
+	float result = floor((a * 1.0)/b);
+	return IONUMBER(result);
 }
 
 IO_METHOD(IoNumber, multiply)

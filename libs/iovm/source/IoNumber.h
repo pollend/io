@@ -55,6 +55,7 @@ IOVM_API IO_METHOD(IoNumber, asNumber);
 IOVM_API IO_METHOD(IoNumber, add_);
 IOVM_API IO_METHOD(IoNumber, subtract);
 IOVM_API IO_METHOD(IoNumber, divide);
+IOVM_API IO_METHOD(IoNumber, floorDivision);
 IOVM_API IO_METHOD(IoNumber, multiply);
 IOVM_API IO_METHOD(IoNumber, printNumber);
 
