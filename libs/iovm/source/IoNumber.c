@@ -174,6 +174,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"isPunctuation", IoNumber_isPunctuation},
 	{"isSpace", IoNumber_isSpace},
 	{"isHexDigit", IoNumber_isHexDigit},
+	{"isPrime", IoNumber_isPrime},
 
 	{"asLowercase", IoNumber_asLowercase},
 	{"asUppercase", IoNumber_asUppercase},
@@ -1182,6 +1183,25 @@ IO_METHOD(IoNumber, isHexDigit)
 
 	return IOBOOL(self, isxdigit((int)DATA(self)));
 }
+
+IO_METHOD(IoNumber, isPrime)
+{
+	/*doc Number isPrime
+	Returns true if
+	integer form of the receiver is prime
+	, false otherwise.
+	*/
+
+	int i = DATA(self);
+	int j;
+  for(j=2;j<i;j++)
+  {
+      if(i%j==0)
+          return IOBOOL(self, 1 == 0);
+  }
+  return IOBOOL(self, 1 == 1);
+}
+
 
 // case ---------------------------------
 
