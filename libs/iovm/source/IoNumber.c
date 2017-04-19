@@ -130,6 +130,39 @@ IoNumber *IoNumber_proto(void *state)
 	{"mod", IoNumber_mod},
 	{"**", IoNumber_pow},
 	{"pow", IoNumber_pow},
+		
+	//Jeff's New Functions
+	{"pound-kilo", IoNumber_poundtokilo},
+	{"kilo-pound", IoNumber_kilo-pound},
+	{"celsius-f", IoNumber_celsiustof},
+	{"fahrenheit-c", IoNumber_fahrenheittoc},
+	{"teaspoon-ml", IoNumber_teaspoontoml},
+	{"ml-teaspoon", Io-NumbeR_ml-teaspoon},
+	{"tablespoon-ml", IoNumber_tablespoon-ml},
+	{"grams-ounce", IoNumber_grams-ounce},
+	{"ounce-grams", IoNumber_ounce-grams},
+	{"mile-kilometers", IoNumber_mile-kilometers},
+	{"kilometers-mile", IoNumber_kilometers-mile},
+	{"inches-cm", IoNumber_inches-cm},
+	{"cm-inches", IoNumber_cm-inches},
+
+	{"Exa", IoNumber_Exa},
+	{"Peta", IoNumber_Peta},
+	{"Tera", IoNumber_Tera},
+	{"Giga", IoNumber_Giga},
+	{"Mega", IoNumber_Mega},
+	{"Kilo", IoNumber_Kilo},
+	{"Hecto", IoNumber_Hecto},
+	{"Deca", IoNumber_Deca},
+	{"Deci", IoNumber_Deci},
+	{"Centi", IoNumber_Centi},
+	{"Milli", IoNumber_Milli},
+	{"Micro", IoNumber_Micro},
+	{"Nano", IoNumber_Nano},
+	{"Pico", IoNumber_Pico},
+	{"Femto", IoNumber_Femto},
+	{"Atto", IoNumber_Atto},	
+		
 	{"round", IoNumber_round},
 	{"roundDown", IoNumber_roundDown},
 	{"sin", IoNumber_sin},
@@ -139,7 +172,8 @@ IoNumber *IoNumber_proto(void *state)
 	{"tan", IoNumber_tan},
 	{"toggle", IoNumber_toggle},
 
-	// logic operations
+
+		// logic operations
 
 	{"&", IoNumber_bitwiseAnd},
 	{"|", IoNumber_bitwiseOr},
