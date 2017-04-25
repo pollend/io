@@ -23,7 +23,8 @@ extern "C" {
 #define log2(num) log(num) / log(2)
 #endif
 
-typedef IoObject IoNumber;
+
+  typedef IoObject IoNumber;
 
 IOVM_API IoNumber *IoNumber_proto(void *state);
 IOVM_API IoNumber *IoNumber_rawClone(IoNumber *self);
@@ -64,6 +65,35 @@ IOVM_API IO_METHOD(IoNumber, justAsString);
 IOVM_API IO_METHOD(IoNumber, asCharacter);
 IOVM_API IO_METHOD(IoNumber, asUint32Buffer);
 //IO_METHOD(IoNumber, asDate);
+IOVM_API IO_METHOD(IoNumber, pound-kilo);
+IOVM_API IO_METHOD(IoNumber, kilo-pound);
+IOVM_API IO_METHOD(IoNumber, celsius-f);
+IOVM_API IO_METHOD(IoNumber, fahrenheit-c);
+IOVM_API IO_METHOD(IoNumber, teaspoon-ml);
+IOVM_API IO_METHOD(IoNumber, ml-teaspoon);
+IOVM_API IO_METHOD(IoNumber, tablespoon-ml);
+IOVM_API IO_METHOD(IoNumber, grams-ounce);
+IOVM_API IO_METHOD(IoNumber, ounce-grams);
+IOVM_API IO_METHOD(IoNumber, mile-kilometers);
+IOVM_API IO_METHOD(IoNumber, kilometers-mile);
+IOVM_API IO_METHOD(IoNumber, inches-cm);
+IOVM_API IO_METHOD(IoNumber, cm-inches);
+IOVM_API IO_METHOD(IoNumber, Exa);
+IOVM_API IO_METHOD(IoNumber, Peta);
+IOVM_API IO_METHOD(IoNumber, Tera);
+IOVM_API IO_METHOD(IoNumber, Giga);
+IOVM_API IO_METHOD(IoNumber, Mega);
+IOVM_API IO_METHOD(IoNumber, Kilo);
+IOVM_API IO_METHOD(IoNumber, Hecto);
+IOVM_API IO_METHOD(IoNumber, Deca);
+IOVM_API IO_METHOD(IoNumber, Deci);
+IOVM_API IO_METHOD(IoNumber, Centi);
+IOVM_API IO_METHOD(IoNumber, Milli);
+IOVM_API IO_METHOD(IoNumber, Micro);
+IOVM_API IO_METHOD(IoNumber, Nano);
+IOVM_API IO_METHOD(IoNumber, Pico);
+IOVM_API IO_METHOD(IoNumber, Femto);
+IOVM_API IO_METHOD(IoNumber, Atto);
 
 // no arg methods
 
