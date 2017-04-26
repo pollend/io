@@ -59,6 +59,7 @@ IOVM_API IO_METHOD(IoNumber, divide);
 IOVM_API IO_METHOD(IoNumber, floorDivision);
 IOVM_API IO_METHOD(IoNumber, multiply);
 IOVM_API IO_METHOD(IoNumber, printNumber);
+IOVM_API IO_METHOD(IoNumber, getIndex);
 
 IOVM_API IO_METHOD(IoNumber, asBuffer);
 IOVM_API IO_METHOD(IoNumber, asString);

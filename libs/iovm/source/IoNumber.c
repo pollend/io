@@ -104,7 +104,8 @@ IoNumber *IoNumber_proto(void *state)
 	{"/", IoNumber_divide},
 	{"//", IoNumber_floorDivision},
 	//{"print", IoNumber_printNumber},
-	
+	{"getIndex", IoNumber_getIndex},
+
 	{"asString", IoNumber_asString},
 	{"asBuffer", IoNumber_asBuffer},
 	{"asCharacter", IoNumber_asCharacter},
@@ -157,7 +158,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"kilometers-mile", IoNumber_kilometers-mile},
 	{"inches-cm", IoNumber_inches-cm},
 	{"cm-inches", IoNumber_cm-inches},
-	
+
 	//More of Jeff's new stuff
 	{"Exa", IoNumber_Exa},
 	{"Peta", IoNumber_Peta},
@@ -175,7 +176,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"Pico", IoNumber_Pico},
 	{"Femto", IoNumber_Femto},
 	{"Atto", IoNumber_Atto},
-		
+
 	{"&", IoNumber_bitwiseAnd},
 	{"|", IoNumber_bitwiseOr},
 	{"^", IoNumber_bitwiseXor},
@@ -493,6 +494,37 @@ IO_METHOD(IoNumber, justAsString)
 	string = IoSeq_newWithCString_((IoState *)IOSTATE, s);
 	io_free(s);
 	return string;
+}
+
+IO_METHOD(IoNumber, getIndex)
+{
+	/*doc Number getIndex
+	returns the number at the given index
+	*/
+
+
+	char* s = IoNumber_asAllocedCString(self);
+	char c = s[0];
+	int x = c - '0';
+
+	/*
+
+	IoSymbol *string;
+	string = IoSeq_newWithCString_((IoState *)IOSTATE, s);
+	IoNumber *other = IoMessage_locals_numberArgAt_(m, locals, 0);
+	int idx = DATA(other);
+
+	size_t length;
+	length = 1024;
+	s = io_calloc(1, length);
+	IoObject *n;
+
+	n = IOSEQ((unsigned char *)s, (size_t)strlen(s));
+
+	IoObject *c = &n[idx];
+
+	*/
+	return IONUMBER(x);
 }
 
 static int countBytes(long ld)
