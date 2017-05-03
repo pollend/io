@@ -507,23 +507,6 @@ IO_METHOD(IoNumber, getIndex)
 	char c = s[0];
 	int x = c - '0';
 
-	/*
-
-	IoSymbol *string;
-	string = IoSeq_newWithCString_((IoState *)IOSTATE, s);
-	IoNumber *other = IoMessage_locals_numberArgAt_(m, locals, 0);
-	int idx = DATA(other);
-
-	size_t length;
-	length = 1024;
-	s = io_calloc(1, length);
-	IoObject *n;
-
-	n = IOSEQ((unsigned char *)s, (size_t)strlen(s));
-
-	IoObject *c = &n[idx];
-
-	*/
 	return IONUMBER(x);
 }
 
