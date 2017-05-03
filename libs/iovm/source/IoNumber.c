@@ -132,6 +132,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"mod", IoNumber_mod},
 	{"**", IoNumber_pow},
 	{"pow", IoNumber_pow},
+	{"exp2", IoNumber_exp2},
 	{"round", IoNumber_round},
 	{"roundDown", IoNumber_roundDown},
 	{"sin", IoNumber_sin},
@@ -981,6 +982,15 @@ IO_METHOD(IoNumber, pow)
 
 	IoNumber *other = IoMessage_locals_numberArgAt_(m, locals, 0);
 	return IONUMBER(pow(DATA(self), DATA(other)));
+}
+
+IO_METHOD(IoNumber, exp2)
+{
+	/*doc Number pow(aNumber)
+	Returns the value of 2 to the receiver's power.
+	*/
+
+	return IONUMBER(pow(2, DATA(self)));
 }
 
 IO_METHOD(IoNumber, round)

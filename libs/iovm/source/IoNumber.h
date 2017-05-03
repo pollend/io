@@ -121,6 +121,7 @@ IOVM_API IO_METHOD(IoNumber, mod);
 //IO_METHOD(IoNumber, rad);
 
 IOVM_API IO_METHOD(IoNumber, pow);
+IOVM_API IO_METHOD(IoNumber, exp2);
 
 IOVM_API IO_METHOD(IoNumber, round);
 IOVM_API IO_METHOD(IoNumber, roundDown);
