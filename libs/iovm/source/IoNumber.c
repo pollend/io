@@ -1094,10 +1094,6 @@ IO_METHOD(IoNumber, toDegrees)
 
 IO_METHOD(IoNumber, toBase)
 {
-	/*doc Number toBase
-	Converts the base 10 receiver to the given base
-	*/
-
 	/*doc Number toBase(aNumber)
 	Returns a new number with the original number converted to the specified base
 	*/
