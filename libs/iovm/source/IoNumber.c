@@ -145,6 +145,31 @@ IoNumber *IoNumber_proto(void *state)
 	{"toRadians", IoNumber_toRadians},
 	{"toDegrees", IoNumber_toDegrees},
 
+	//Albert functions
+	{"MagVector",IoNumber_MagVector},
+	{"Area_SAStriangle",IoNumber_Area_SAStriangle},
+	{"Area_EQTriangle",IoNumber_Area_EQTriangle},
+	{"Area_triangle",IoNumber_Area_triangle},
+	{"Area_ellipse",IoNumber_Area_ellipse},
+	{"Area_circle",IoNumber_Area_circle},
+	{"Area_trap",IoNumber_Area_trap},
+	{"Area_rect",IoNumber_Area_rect},
+	{"Area_parallel",IoNumber_Area_parallel},
+	{"Area_sq",IoNumber_Area_sq},
+	{"isBetween",IoNumber_isBetween},
+	{"EulerNum", IoNumber_EulerNum},
+	{"M_E", IoNumber_M_E},
+	{"M_PI",IoNumber_M_PI},
+	{"M_PI_2",IoNumber_M_PI_2},
+	{"M_PI_4",IoNumber_M_PI_4},
+	{"fma",IoNumber_fma},
+	{"fms",IoNumber_fms},
+	{"fda",IoNumber_fda},
+	{"fds",IoNumber_fds},
+	{"quadraticEq",IoNumber_quadraticEq},
+	{"gcd",IoNumber_gcd},
+	//End of Albert functions
+
 	//Jeff's New Functions
 	{"pound-kilo", IoNumber_poundtokilo},
 	{"kilo-pound", IoNumber_kilo-pound},
@@ -524,6 +549,193 @@ static int countBytes(long ld)
 		n++;
 	}
 }
+
+//Alberts functions
+
+IO_METHOD(IoNumber, MagVector){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    return IONUMBER(sqrt(pow(DATA(a),2) + pow(DATA(b),2)));
+}
+
+IO_METHOD(IoNumber, Area_SAStriangle){ //2 sides of a triangle and an angle find the area
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *angle = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER(0.5 * DATA(a) * DATA(b) * sin(DATA(angle) * (M_PI / 180.0)));
+}
+
+IO_METHOD(IoNumber, Area_EQTriangle){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+
+    return IONUMBER((sqrt(3) / 4) * pow(DATA(a),2));
+}
+
+IO_METHOD(IoNumber, Area_triangle){
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *h = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    return IONUMBER((0.5) * DATA(b) * DATA(h));
+}
+
+IO_METHOD(IoNumber, Area_ellipse){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    return IONUMBER(M_PI * DATA(a) * DATA(b));
+}
+
+IO_METHOD(IoNumber, Area_circle){
+    IoNumber *r = IoMessage_locals_numberArgAt_(m, locals, 0);
+
+    return IONUMBER(M_PI * pow(DATA(r), 2));
+}
+
+IO_METHOD(IoNumber, Area_trap){
+    IoNumber *b1 = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b2 = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *h = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER((DATA(h) / 2) * (DATA(b1) + DATA(b2)));
+}
+
+IO_METHOD(IoNumber, Area_parallel){
+    IoNumber *n1 = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *n2 = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    return IONUMBER(DATA(n1) * DATA(n2));
+
+}
+
+IO_METHOD(IoNumber, Area_rect){
+    IoNumber *n1 = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *n2 = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    return IONUMBER(DATA(n1) * DATA(n2));
+}
+
+IO_METHOD(IoNumber, Area_sq){
+    IoNumber *n1 = IoMessage_locals_numberArgAt_(m, locals, 0);
+
+    return IONUMBER(pow(DATA(n1),2));
+}
+
+
+IO_METHOD(IoNumber, gcd){
+
+    IoNumber *n1 = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *n2 = IoMessage_locals_numberArgAt_(m, locals, 1);
+
+    int gcd;
+    int i;
+    int num1 = DATA(n1);
+    int num2 = DATA(n2);
+    for(i=1; i <= num1 && i <= num2; ++i)
+    {
+        // Checks if i is factor of both integers
+        if(num1%i==0 && num2%i==0)
+            gcd = i;
+    }
+    return IONUMBER(gcd);
+}
+
+
+IO_METHOD(IoNumber, isBetween){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    if(DATA(b) < DATA(c) & DATA(b) > DATA(a)){
+        return IONUMBER(1);
+    }
+    else{
+        return IONUMBER(0);
+    }
+}
+
+IO_METHOD(IoNumber, M_E){
+    return IONUMBER(0.5772156649);
+}
+
+IO_METHOD(IoNumber,EulerNum){
+    return IONUMBER(2.71828182845904523536028747135266249775724709369995957496696762772407663035354759457138217852516642742746639193200305992181741359662904357290033429526059563);
+}
+
+IO_METHOD(IoNumber, M_PI){
+    float x = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337;
+
+    return IONUMBER(x);
+}
+
+IO_METHOD(IoNumber, M_PI_2){
+    float x = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337/2;
+
+    return IONUMBER(x);
+}
+
+IO_METHOD(IoNumber, M_PI_4){
+    float x = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337/4;
+
+    return IONUMBER(x);
+}
+
+IO_METHOD(IoNumber, fma){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER(DATA(a) * DATA(b) + DATA(c));
+}
+
+IO_METHOD(IoNumber, fms){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER(DATA(a) * DATA(b) - DATA(c));
+}
+
+IO_METHOD(IoNumber, fda){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER(DATA(a) / DATA(b) + DATA(c));
+}
+
+IO_METHOD(IoNumber, fds){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    return IONUMBER(DATA(a) / DATA(b) - DATA(c));
+}
+
+IO_METHOD(IoNumber, quadraticEq){
+    IoNumber *a = IoMessage_locals_numberArgAt_(m, locals, 0);
+    IoNumber *b = IoMessage_locals_numberArgAt_(m, locals, 1);
+    IoNumber *c = IoMessage_locals_numberArgAt_(m, locals, 2);
+
+    float d = pow(DATA(b),2)-4*DATA(a)*DATA(c);
+    char *comma = ",";
+
+    if(d < 0){
+        return IONUMBER(-1);
+    }
+    if(d == 0){
+        return IONUMBER((-DATA(b)+sqrt(pow(DATA(b),2)-4*DATA(a)*DATA(c)))/2*DATA(a));
+    }
+    if(d > 0){
+        float x1 = (-DATA(b)+sqrt(pow(DATA(b),2)-(4*(DATA(a)*DATA(c)))))/(2*DATA(a));
+        float x2 = (-DATA(b)-sqrt(pow(DATA(b),2)-(4*(DATA(a)*DATA(c)))))/(2*DATA(a));
+        IoNumber_print(IONUMBER(x1));
+        IoState_print_((IoState *)IOSTATE, comma);
+        return IONUMBER(x2);
+    }
+}
+//End Alberts Funnnnnctionnnnnssss
 
 //BEGINNING OF JEFF FUNCTIONS
 IO_METHOD(IoNumber, pound-kilo)

@@ -97,6 +97,30 @@ IOVM_API IO_METHOD(IoNumber, Pico);
 IOVM_API IO_METHOD(IoNumber, Femto);
 IOVM_API IO_METHOD(IoNumber, Atto);
 
+//Alberts funnccttttionns
+IOVM_API IO_METHOD(IoNumber, MagVector);
+IOVM_API IO_METHOD(IoNumber, Area_SAStriangle);
+IOVM_API IO_METHOD(IoNumber, Area_EQTriangle);
+IOVM_API IO_METHOD(IoNumber, Area_triangle);
+IOVM_API IO_METHOD(IoNumber, Area_ellipse);
+IOVM_API IO_METHOD(IoNumber, Area_circle);
+IOVM_API IO_METHOD(IoNumber, Area_trap);
+IOVM_API IO_METHOD(IoNumber, Area_parallel);
+IOVM_API IO_METHOD(IoNumber, Area_rect);
+IOVM_API IO_METHOD(IoNumber, Area_sq);
+IOVM_API IO_METHOD(IoNumber, gcd);
+IOVM_API IO_METHOD(IoNumber, isBetween);
+IOVM_API IO_METHOD(IoNumber, EulerNum);
+IOVM_API IO_METHOD(IoNumber, M_E);
+IOVM_API IO_METHOD(IoNumber, M_PI);
+IOVM_API IO_METHOD(IoNumber, M_PI_2);
+IOVM_API IO_METHOD(IoNumber, M_PI_4);
+IOVM_API IO_METHOD(IoNumber,fma);
+IOVM_API IO_METHOD(IoNumber,fms);
+IOVM_API IO_METHOD(IoNumber,fda);
+IOVM_API IO_METHOD(IoNumber,fds);
+IOVM_API IO_METHOD(IoNumber,quadraticEq);
+
 // no arg methods
 
 IOVM_API IO_METHOD(IoNumber, abs);
