@@ -62,6 +62,22 @@ Matrix* Matrix_multiply(Matrix* m1, Matrix* m2)
             Matrix_put_(result,x,y,out);
         }
     }
+    return result;
+}
+
+Matrix* Matrix_transpose(Matrix* m1)
+{
+    Matrix* result = Matrix_new(m1->size1,m1->size2);
+    for(int x = 0; x < result->size1; ++x)
+    {
+        for(int y = 0; y < result->size2; ++y)
+        {
+          double out = Matrix_at_(m1,x,y)
+
+          Matrix_put_(result,y,x,out);
+        }
+    }
+    return result;
 }
 
 void Matrix_put_(Matrix* m1,int x, int y, double value)
@@ -79,7 +95,3 @@ void Matrix_free(Matrix* matrix)
     io_free(matrix->data);
     io_free(matrix);
 }
-
-
-
-
