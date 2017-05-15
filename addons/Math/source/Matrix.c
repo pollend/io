@@ -80,6 +80,36 @@ Matrix* Matrix_transpose(Matrix* m1)
     return result;
 }
 
+double Matrix_Determinant(Matrix* m1)
+{
+    double determinant;
+
+    if (m1->size1 > 3 || m1->size2 > 3)
+    {
+       printf("invalid matrix size");
+       return 0;
+    }
+    if (m1->size1 != m1->size2)
+    {
+       printf("invalid matrix dimensions");
+       return 0;
+    }
+    if (m1->size1 == m1->size2 == 1)
+    {
+      return Matrix_at_(m1,0,0);
+    }
+    else if (m1->size1 == m1->size2 == 2)
+    {
+      determinant = Matrix_at_(m1,0,0)*Matrix_at_(m1,1,1) - Matrix_at_(m1,1,0)*Matrix_at_(m1,0,1);
+    }
+    else if (m1->size1 == m1->size2 == 3)
+    {
+      determinant = Matrix_at_(m1,0,0)*((Matrix_at_(m1,1,1)*Matrix_at_(m1,2,2)) - (Matrix_at_(m1,2,1)*Matrix_at_(m1,1,2)))-Matrix_at_(m1,0,1)*((Matrix_at_(m1,1,0)*Matrix_at_(m1,2,2))-(Matrix_at_(m1,2,0)*Matrix_at_(m1,1,2)))+Matrix_at_(m1,0,2)*((Matrix_at_(m1,1,0)*Matrix_at_(m1,2,1))-(Matrix_at_(m1,2,0)*Matrix_at_(m1,1,1)));
+    }
+
+    return determinant;
+}
+
 void Matrix_put_(Matrix* m1,int x, int y, double value)
 {
     m1->data[(x * m1->size1) + y] = value;

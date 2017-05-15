@@ -26,6 +26,7 @@ Matrix* Matrix_add(Matrix* m1, Matrix* m2);
 Matrix* Matrix_subtract(Matrix* m1, Matrix* m2);
 Matrix* Matrix_multiply(Matrix* m1, Matrix* m2);
 Matrix* Matrix_transpose(Matrix* m1);
+double Matrix_Determinant(Matrix* m1);
 
 double Matrix_at_(Matrix* m1,int x, int y);
 void Matrix_put_(Matrix* m1,int x, int y, double value);
