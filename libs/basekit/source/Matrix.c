@@ -65,16 +65,20 @@ Matrix* Matrix_multiply(Matrix* m1, Matrix* m2)
     return result;
 }
 
+//Matrix clone set(list(list(1,10,4),list(2,9,5))) transpose
+
 Matrix* Matrix_transpose(Matrix* m1)
 {
-    Matrix* result = Matrix_new(m1->size1,m1->size2);
-    for(int x = 0; x < result->size1; ++x)
-    {
-        for(int y = 0; y < result->size2; ++y)
-        {
-          double out = Matrix_at_(m1,x,y);
+    Matrix* result = Matrix_new(m1->size2,m1->size1);
+    int rows =  Matrix_row_count_(m1);
+    int columns =  Matrix_column_count_(m1);
 
-          Matrix_put_(result,y,x,out);
+
+    for(int y = 0; y < columns ; ++y) {
+        for (int x = 0; x < rows; ++x) {
+            double out = Matrix_at_(m1, x, y);
+            Matrix_put_(result, y, x, out);
+
         }
     }
     return result;

@@ -43,6 +43,7 @@ set(IO_SRCS
 	${CMAKE_CURRENT_SOURCE_DIR}/io/Z_CLI.io
 	${CMAKE_CURRENT_SOURCE_DIR}/io/Z_Importer.io
 	${CMAKE_CURRENT_SOURCE_DIR}/io/A0_Tuple.io
+	${CMAKE_CURRENT_SOURCE_DIR}/io/A0_Matrix.io
 )
 
 # Object files from every lib. Used to create iovmall static library.

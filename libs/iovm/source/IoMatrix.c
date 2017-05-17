@@ -33,9 +33,16 @@ IoMatrix *IoMatrix_proto(void *state)
 
             {"at",IoMatrix_at},
 
+            {"row",IoMatrix_row},
+            {"column",IoMatrix_column},
+            {"transpose",IoMatrix_transpose},
+
+
             {"*",IoMatrix_multiply},
             {"+",IoMatrix_add},
             {"-",IoMatrix_subtract},
+
+            {"toList",IoMatrix_toList},
 
             {NULL,NULL}
     };
@@ -61,7 +68,6 @@ int IoMatrix_compare(IoObject *self, IoObject *otherObject)
     {
         return  1;
     }
-    return 0;
 }
 
 void IoMatrix_mark(IoMatrix *self)
@@ -85,7 +91,7 @@ IOVM_API IoMatrix *IoMatrix_new(void *state)
     return IOCLONE(proto);
 }
 
-//a := Matrix clone set(list(list(1,2),list(2,3)))
+//a := Matrix clone set(list(list(1,2),list(2,3))) row(1)
 void IoMatrix_free(IoMatrix *self)
 {
     if (NULL == DATA(self))
@@ -133,12 +139,12 @@ IO_METHOD(IoMatrix, set)
 IO_METHOD(IoMatrix, rowCount)
 {
     Matrix* m1 =  DATA(self);
-    return Matrix_row_count_(m1);
+    return IONUMBER(Matrix_row_count_(m1));
 }
 IO_METHOD(IoMatrix, columnCount)
 {
     Matrix* m1 =  DATA(self);
-    return Matrix_column_count_(m1);
+    return IONUMBER(Matrix_column_count_(m1));
 }
 
 IO_METHOD(IoMatrix, at)
@@ -159,10 +165,8 @@ IO_METHOD(IoMatrix, at)
 
 IO_METHOD(IoMatrix, multiply)
 {
-    IoMatrix* IoObject1 =  IoMessage_locals_MatrixArgAt_(m,locals,0);
-    IoMatrix* IoObject2 =  IoMessage_locals_MatrixArgAt_(m,locals,1);
-    Matrix* m1 =  DATA(IoObject1);
-    Matrix* m2 =  DATA(IoObject2);
+    Matrix* m1 =  DATA(self);
+    Matrix* m2 =  DATA(IoMessage_locals_MatrixArgAt_(m,locals,0));
 
     IOASSERT(Matrix_row_count_(m1) == Matrix_column_count_(m2), "Matrix rows and columns have to match");
     Matrix* m3 = Matrix_multiply(m1,m2);
@@ -173,12 +177,11 @@ IO_METHOD(IoMatrix, multiply)
     return out;
 }
 
+//Matrix clone set(list(list(1,2),list(2,3))) transpose + Matrix clone set(list(list(1,2),list(2,3)))
 IO_METHOD(IoMatrix, add)
 {
-    IoMatrix* IoObject1 =  IoMessage_locals_MatrixArgAt_(m,locals,0);
-    IoMatrix* IoObject2 =  IoMessage_locals_MatrixArgAt_(m,locals,1);
-    Matrix* m1 =  DATA(IoObject1);
-    Matrix* m2 =  DATA(IoObject2);
+    Matrix* m1 =  DATA(self);
+    Matrix* m2 =  DATA(IoMessage_locals_MatrixArgAt_(m,locals,0));
 
     IOASSERT(Matrix_row_count_(m1) == Matrix_row_count_(m2), "Matrix rows mismatch");
     IOASSERT(Matrix_column_count_(m1) == Matrix_column_count_(m2), "Matrix columns mismatch");
@@ -193,10 +196,8 @@ IO_METHOD(IoMatrix, add)
 
 IO_METHOD(IoMatrix, subtract)
 {
-    IoMatrix* IoObject1 =  IoMessage_locals_MatrixArgAt_(m,locals,0);
-    IoMatrix* IoObject2 =  IoMessage_locals_MatrixArgAt_(m,locals,1);
-    Matrix* m1 =  DATA(IoObject1);
-    Matrix* m2 =  DATA(IoObject2);
+    Matrix* m1 =  DATA(self);
+    Matrix* m2 =  DATA(IoMessage_locals_MatrixArgAt_(m,locals,0));
 
     IOASSERT(Matrix_row_count_(m1) == Matrix_row_count_(m2), "Matrix rows mismatch");
     IOASSERT(Matrix_column_count_(m1) == Matrix_column_count_(m2), "Matrix columns mismatch");
@@ -214,13 +215,78 @@ IO_METHOD(IoMatrix, subtract)
 IO_METHOD(IoMatrix, row)
 {
     Matrix* m1 = DATA(self);
+    int index = IoMessage_locals_intArgAt_(m,locals,0);
 
     List* list = List_new();
+    IoList* ioList = IoList_new(IOSTATE);
+    size_t row_count = Matrix_row_count_(m1);
 
+    for(size_t x = 0; x < row_count; ++x)
+    {
+        List_append_(list,IONUMBER(Matrix_at_(m1,x,index)));
+    }
+
+    IoObject_setDataPointer_(ioList, list);
+    IoObject_isDirty_(ioList,1);
+    return ioList;
 }
 
 IO_METHOD(IoMatrix, column)
 {
     Matrix* m1 = DATA(self);
+    int index = IoMessage_locals_intArgAt_(m,locals,0);
+
+    List* list = List_new();
+    IoList* ioList = IoList_new(IOSTATE);
+    size_t row_count = Matrix_row_count_(m1);
+
+    for(size_t x = 0; x < row_count; ++x)
+    {
+        List_append_(list,IONUMBER(Matrix_at_(m1,index,x)));
+    }
+
+    IoObject_setDataPointer_(ioList, list);
+    IoObject_isDirty_(ioList,1);
+    return ioList;
 }
 
+IO_METHOD(IoMatrix, toList)
+{
+    Matrix* m1 = DATA(self);
+
+    List* list = List_new();
+    IoList* ioList = IoList_new(IOSTATE);
+
+    List* out = List_new();
+
+    for(size_t x = 0; x < Matrix_column_count_(m1); ++x)
+    {
+        List* temp = List_new();
+        IoList* ioTempList = IoList_new(IOSTATE);
+        for(size_t y = 0; y < Matrix_row_count_(m1); ++y)
+        {
+            List_append_(temp,IONUMBER(Matrix_at_(m1,x,y)));
+        }
+        IoObject_setDataPointer_(ioTempList, temp);
+        IoObject_isDirty_(ioTempList,1);
+
+        List_append_(out,ioTempList);
+    }
+
+    IoList* ioResult = IoList_new(IOSTATE);
+    IoObject_setDataPointer_(ioResult, out);
+    IoObject_isDirty_(ioResult,1);
+    return ioResult;
+}
+
+IO_METHOD(IoMatrix, transpose)
+{
+    Matrix* m1 = DATA(self);
+
+    Matrix* result = Matrix_transpose(m1);
+
+    IoMatrix* out = (IoMatrix*)IoMatrix_new(IOSTATE);
+    IoObject_setDataPointer_(out, result);
+    IoObject_isDirty_(out,1);
+    return out;
+}

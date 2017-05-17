@@ -31,11 +31,14 @@ IOVM_API IO_METHOD(IoMatrix, columnCount);
 IOVM_API IO_METHOD(IoMatrix, at);
 
 IOVM_API IO_METHOD(IoMatrix, multiply);
+IOVM_API IO_METHOD(IoMatrix, transpose);
 IOVM_API IO_METHOD(IoMatrix, add);
 IOVM_API IO_METHOD(IoMatrix, subtract);
 
 IOVM_API IO_METHOD(IoMatrix, row);
 IOVM_API IO_METHOD(IoMatrix, column);
+
+IOVM_API IO_METHOD(IoMatrix, toList);
 
 
 
