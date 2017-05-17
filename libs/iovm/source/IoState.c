@@ -16,6 +16,7 @@
 #include "IoList.h"
 #include "IoTuple.h"
 #include "IoMap.h"
+#include "IoMatrix.h"
 //#include "IoRange.h"
 #include "IoFile.h"
 #include "IoDate.h"
@@ -175,6 +176,7 @@ void IoState_new_atAddress(void *address)
 		IoObject_setSlot_to_(core, SIOSYMBOL("Block"),      IoBlock_proto(self));
 		IoObject_setSlot_to_(core, SIOSYMBOL("List"),       IoList_proto(self));
 		IoObject_setSlot_to_(core, SIOSYMBOL("Tuple"),      IoTuple_proto(self));
+		IoObject_setSlot_to_(core, SIOSYMBOL("Matrix"),		IoMatrix_proto(self));
 		IoObject_setSlot_to_(core, SIOSYMBOL("Map"),        IoMap_proto(self));
 		//IoObject_setSlot_to_(core, SIOSYMBOL("Range"),      IoRange_proto(self));
 		IoObject_setSlot_to_(core, SIOSYMBOL("Coroutine"),  self->mainCoroutine);

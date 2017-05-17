@@ -2,8 +2,8 @@
 // Created by michaelpollind on 4/8/17.
 //
 
-#ifndef IOLANGUAGE_MATRIX_H
-#define IOLANGUAGE_MATRIX_H
+#ifndef MATRIX_DEFINED
+#define MATRIX_DEFINED 1
 
 #include "Common.h"
 
@@ -30,6 +30,10 @@ double Matrix_Determinant(Matrix* m1);
 
 double Matrix_at_(Matrix* m1,int x, int y);
 void Matrix_put_(Matrix* m1,int x, int y, double value);
+
+size_t Matrix_row_count_(Matrix* m1);
+size_t Matrix_column_count_(Matrix* m1);
+
 
 Matrix* Matrix_transpose(Matrix* m1);
 #ifdef __cplusplus

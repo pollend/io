@@ -43,6 +43,7 @@ But the cost to performance seems to outweigh the need to cover this case for no
 #include <stdarg.h>
 #include "IoMessage_parser.h"
 #include "IoMessage_opShuffle.h"
+#include "IoMatrix.h"
 
 static const char *protoId = "Message";
 #define DATA(self) ((IoMessageData *)IoObject_dataPointer(self))
@@ -724,6 +725,14 @@ IoObject *IoMessage_locals_listArgAt_(IoMessage *self, IoObject *locals, int n)
 	if (!ISLIST(v)) IoMessage_locals_numberArgAt_errorForType_(self, locals, n, "List");
 	return v;
 }
+
+IoObject *IoMessage_locals_MatrixArgAt_(IoMessage *self, IoObject *locals, int n)
+{
+	IoObject *v = IoMessage_locals_valueArgAt_(self, locals, n);
+	if (!IS_MATRIX(v)) IoMessage_locals_numberArgAt_errorForType_(self, locals, n, "Matrix");
+	return v;
+}
+
 
 IoObject *IoMessage_locals_mapArgAt_(IoMessage *self, IoObject *locals, int n)
 {

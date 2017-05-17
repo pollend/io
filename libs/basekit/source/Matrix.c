@@ -56,7 +56,7 @@ Matrix* Matrix_multiply(Matrix* m1, Matrix* m2)
             double out = 0.0;
             for(int z = 0; z < m1->size1; ++z)
             {
-                out += Matrix_at_(m2,x,z)*Matrix_at_(m1,z,y)
+                out += Matrix_at_(m2,x,z)*Matrix_at_(m1,z,y);
             }
 
             Matrix_put_(result,x,y,out);
@@ -72,7 +72,7 @@ Matrix* Matrix_transpose(Matrix* m1)
     {
         for(int y = 0; y < result->size2; ++y)
         {
-          double out = Matrix_at_(m1,x,y)
+          double out = Matrix_at_(m1,x,y);
 
           Matrix_put_(result,y,x,out);
         }
@@ -97,7 +97,7 @@ double Matrix_Determinant(Matrix* m1)
       determinant = Matrix_at_(m1,0,0)*((Matrix_at_(m1,1,1)*Matrix_at_(m1,2,2)) - (Matrix_at_(m1,2,1)*Matrix_at_(m1,1,2)))-Matrix_at_(m1,0,1)*((Matrix_at_(m1,1,0)*Matrix_at_(m1,2,2))-(Matrix_at_(m1,2,0)*Matrix_at_(m1,1,2)))+Matrix_at_(m1,0,2)*((Matrix_at_(m1,1,0)*Matrix_at_(m1,2,1))-(Matrix_at_(m1,2,0)*Matrix_at_(m1,1,1)));
     }
     else {
-      printf("invalid matrix dimensions");
+//      printf("invalid matrix dimensions");
       return 0;
     }
 
@@ -119,3 +119,13 @@ void Matrix_free(Matrix* matrix)
     io_free(matrix->data);
     io_free(matrix);
 }
+
+size_t Matrix_row_count_(Matrix* m1)
+{
+    return m1->size2;
+}
+size_t Matrix_column_count_(Matrix* m1)
+{
+    return  m1->size1;
+}
+

@@ -136,9 +136,8 @@ IO_METHOD(IoTuple, empty)
     Emptys the current tuple
     */
 
-    UArray_free(DATA(self));
-    IoObject_setDataPointer_(self,UArray_new());
-    return  self;
+    IoTuple* ioTuple = IoTuple_new(IOSTATE);
+    return  ioTuple;
 }
 
 IO_METHOD(IoTuple, set)
@@ -146,7 +145,6 @@ IO_METHOD(IoTuple, set)
     /*doc Tuple set(..)
     Sets the current Tuple from a set of provided objects.
    */
-
 
     int n, argCount = (int)IoMessage_argCount(m);
 
@@ -159,9 +157,10 @@ IO_METHOD(IoTuple, set)
 
     UArray *ba = UArray_newWithData_type_encoding_size_copy_(tuple,CTYPE_uintptr_t,CENCODING_NUMBER,(size_t)argCount,0);
 
-    IoObject_setDataPointer_(self, ba);
-    IoObject_isDirty_(self,1);
-    return self;
+    IoTuple* ioTuple = IoTuple_new(IOSTATE);
+    IoObject_setDataPointer_(ioTuple, ba);
+    IoObject_isDirty_(ioTuple,1);
+    return ioTuple;
 }
 
 IO_METHOD(IoTuple,concat)
@@ -190,7 +189,7 @@ IO_METHOD(IoTuple,concat)
     }
 
     for (size_t i = 0; i < s2; ++i) {
-        tuple[i + s2] = IOREF(UArray_pointerAt_(DATA(other),i));
+        tuple[i + s1] = IOREF(UArray_pointerAt_(DATA(other),i));
     }
 
     UArray *ba = UArray_newWithData_type_encoding_size_copy_(tuple,CTYPE_uintptr_t,CENCODING_NUMBER,(size_t)(s1+s2),0);

@@ -125,6 +125,7 @@ IOVM_API IoObject *IoMessage_locals_dateArgAt_(IoMessage *self, IoObject *locals
 IOVM_API IoObject *IoMessage_locals_mapArgAt_(IoMessage *self, IoObject *locals, int n);
 IOVM_API IoObject *IoMessage_locals_messageArgAt_(IoMessage *self, IoObject *locals, int n);
 IOVM_API IoObject *IoMessage_locals_listArgAt_(IoMessage *self, IoObject *locals, int n);
+IOVM_API IoObject *IoMessage_locals_MatrixArgAt_(IoMessage *self, IoObject *locals, int n);
 
 // printing
 

@@ -171,19 +171,19 @@ IoNumber *IoNumber_proto(void *state)
 	//End of Albert functions
 
 	//Jeff's New Functions
-	{"pound-kilo", IoNumber_poundtokilo},
-	{"kilo-pound", IoNumber_kilo-pound},
-	{"celsius-f", IoNumber_celsiustof},
-	{"fahrenheit-c", IoNumber_fahrenheittoc},
-	{"teaspoon-ml", IoNumber_teaspoontoml},
-	{"ml-teaspoon", Io-NumbeR_ml-teaspoon},
-	{"tablespoon-ml", IoNumber_tablespoon-ml},
-	{"grams-ounce", IoNumber_grams-ounce},
-	{"ounce-grams", IoNumber_ounce-grams},
-	{"mile-kilometers", IoNumber_mile-kilometers},
-	{"kilometers-mile", IoNumber_kilometers-mile},
-	{"inches-cm", IoNumber_inches-cm},
-	{"cm-inches", IoNumber_cm-inches},
+    {"pound-kilo", IoNumber_poundKilo},
+    {"kilo-pound", IoNumber_kiloPound},
+    {"celsius-f", IoNumber_celsiusFahrenheit},
+    {"fahrenheit-c", IoNumber_fahrenheitToCelsius},
+    {"teaspoon-ml", IoNumber_teaspoonMilliliter},
+    {"ml-teaspoon", IoNumber_milliliterTeaspoon},
+    {"tablespoon-ml", IoNumber_tablespoonMilliliters},
+    {"grams-ounce", IoNumber_gramsOunce},
+    {"ounce-grams", IoNumber_ounceGrams},
+    {"mile-kilometers", IoNumber_mileKilometer},
+    {"kilometers-mile", IoNumber_kilometerMile},
+    {"inches-cm", IoNumber_inchesCentimeter},
+    {"cm-inches", IoNumber_centimeterInches},
 
 	//More of Jeff's new stuff
 	{"Exa", IoNumber_Exa},
@@ -194,7 +194,7 @@ IoNumber *IoNumber_proto(void *state)
 	{"Kilo", IoNumber_Kilo},
 	{"Hecto", IoNumber_Hecto},
 	{"Deca", IoNumber_Deca},
-	{"Deci", IoNumber_Deci},
+//	{"Deci", IoNumber_Deci},
 	{"Centi", IoNumber_Centi},
 	{"Milli", IoNumber_Milli},
 	{"Micro", IoNumber_Micro},
@@ -738,59 +738,59 @@ IO_METHOD(IoNumber, quadraticEq){
 //End Alberts Funnnnnctionnnnnssss
 
 //BEGINNING OF JEFF FUNCTIONS
-IO_METHOD(IoNumber, pound-kilo)
+IO_METHOD(IoNumber, poundKilo)
 {
 	return IONUMBER(DATA(self) / 2.2);
 }
-IO_METHOD(IoNumber, kilo-pound)
+IO_METHOD(IoNumber, kiloPound)
 {
 	return IONUMBER(DATA(self) * 2.2);
 }
-IO_METHOD(IoNumber, celsius-f)
+IO_METHOD(IoNumber, celsiusFahrenheit)
 {
 	return IONUMBER((DATA(self)*1.8)*32);
 }
-IO_METHOD(IoNumber, fahrenheit-c)
+IO_METHOD(IoNumber, fahrenheitToCelsius)
 {
 	return IONUMBER((DATA(self)-32) * .555);
 }
-IO_METHOD(IoNumber, teaspoon-ml)
+IO_METHOD(IoNumber, teaspoonMilliliter)
 {
 	return IONUMBER(DATA(self) / 4.929);
 }
-IO_METHOD(IoNumber, ml-teaspoon)
+IO_METHOD(IoNumber, milliliterTeaspoon)
 {
 	return IONUMBER(DATA(self) * 4.929);
 }
-IO_METHOD(IoNumber, ml-tablespoon)
+IO_METHOD(IoNumber, millilitersTablespoon)
 {
 	return IONUMBER(DATA(self) / 14.787);
 }
-IO_METHOD(IoNumber, tablespoon-ml)
+IO_METHOD(IoNumber, tablespoonMilliliters)
 {
 	return IONUMBER(DATA(self) * 14.768);
 }
-IO_METHOD(IoNumber, grams-ounce)
+IO_METHOD(IoNumber, gramsOunce)
 {
 	return IONUMBER(DATA(self) / 28);
 }
-IO_METHOD(IoNumber, ounce-grams)
+IO_METHOD(IoNumber, ounceGrams)
 {
 	return IONUMBER(DATA(self) * 28);
 }
-IO_METHOD(IoNumber, mile-kilometers)
+IO_METHOD(IoNumber, mileKilometer)
 {
 	return IONUMBER(DATA(self) * 1.6);
 }
-IO_METHOD(IoNumber, kilometers-mile)
+IO_METHOD(IoNumber, kilometerMile)
 {
 	return IONUMBER(DATA(self) / 1.6);
 }
-IO_METHOD(IoNumber, inches-cm)
+IO_METHOD(IoNumber, inchesCentimeter)
 {
 	return IONUMBER(DATA(self) * 2.54);
 }
-IO_METHOD(IoNumber, cm-inches)
+IO_METHOD(IoNumber, centimeterInches)
 {
 	return IONUMBER(DATA(self) / 2.54);
 }

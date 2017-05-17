@@ -11,7 +11,7 @@ generate_ioinit(Math)
 
 # Our library sources.
 set(SRCS
-	"${CMAKE_CURRENT_SOURCE_DIR}/source/Matrix.c"
+	"../../libs/basekit/source/Matrix.c"
 )
 
 # Now build the shared library
