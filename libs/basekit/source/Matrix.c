@@ -74,8 +74,8 @@ Matrix* Matrix_transpose(Matrix* m1)
     int columns =  Matrix_column_count_(m1);
 
 
-    for(int y = 0; y < columns ; ++y) {
-        for (int x = 0; x < rows; ++x) {
+    for(int y = 0; y < rows ; ++y) {
+        for (int x = 0; x < columns; ++x) {
             double out = Matrix_at_(m1, x, y);
             Matrix_put_(result, y, x, out);
 
@@ -110,12 +110,12 @@ double Matrix_Determinant(Matrix* m1)
 
 void Matrix_put_(Matrix* m1,int x, int y, double value)
 {
-    m1->data[(x * m1->size1) + y] = value;
+    m1->data[(x * m1->size2) + y] = value;
 }
 
 double Matrix_at_(Matrix* m1,int x,int y)
 {
-    return m1->data[(x * m1->size1) + y];
+    return m1->data[(x * m1->size2) + y];
 }
 
 void Matrix_free(Matrix* matrix)
